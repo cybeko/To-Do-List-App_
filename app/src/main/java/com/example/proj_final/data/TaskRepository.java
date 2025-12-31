@@ -14,7 +14,13 @@ public class TaskRepository {
         allTasks = dao.getAllTasks();
     }
     public LiveData<List<Task>> getAllTasks() { return allTasks; }
-
+    public LiveData<List<Task>> getTasksByPriority() { return dao.getTasksByPriority(); }
+    public LiveData<List<Task>> getTasksByName() {
+        return dao.getTasksByName();
+    }
+    public LiveData<List<Task>> getTasksByNewest() {
+        return dao.getTasksByNewest();
+    }
     public void insert(Task t) { new Thread(() -> dao.insert(t)).start(); }
     public void delete(Task task) {
         new Thread(() -> dao.delete(task)).start();

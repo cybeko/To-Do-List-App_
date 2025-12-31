@@ -38,7 +38,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/material_dynamic_neutral10"
                 android:paddingStart="8dp"
-                android:text="Название задачи"/>
+                android:text="Title"/>
             <ImageView
                 android:id="@+id/ivExpand"
                 android:layout_width="40dp"
@@ -68,7 +68,7 @@
                 android:id="@+id/tvDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Описание задачи"
+                android:text="Description"
                 android:textSize="14sp"
                 android:textColor="@color/material_dynamic_neutral30"
                 android:lineSpacingExtra="4dp"
@@ -78,7 +78,7 @@
                 android:id="@+id/tvDeadline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="📅 Дедлайн: 12/05/2025 14:00"
+                android:text="Deadline"
                 android:textSize="13sp"
                 android:textColor="@color/material_dynamic_neutral40"
                 android:paddingBottom="4dp"/>
@@ -87,7 +87,7 @@
                 android:id="@+id/tvPriority"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="🔥 Приоритет: 2"
+                android:text="Priority"
                 android:textSize="13sp"
                 android:textStyle="bold"
                 android:textColor="@color/material_dynamic_neutral30"/>

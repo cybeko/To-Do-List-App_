@@ -17,6 +17,15 @@ public class TaskViewModel extends AndroidViewModel {
         allTasks = repo.getAllTasks();
     }
     public LiveData<List<Task>> getAllTasks() { return allTasks; }
+    public LiveData<List<Task>> getTasksByPriority() {
+        return repo.getTasksByPriority();
+    }
+    public LiveData<List<Task>> getTasksByName() {
+        return repo.getTasksByName();
+    }
+    public LiveData<List<Task>> getTasksByNewest() {
+        return repo.getTasksByNewest();
+    }
     public void insert(Task t) { repo.insert(t); }
     public void delete(Task task) {
         repo.delete(task);

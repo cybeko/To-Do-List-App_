@@ -77,11 +77,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void setupStatusBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.setStatusBarColor(Color.parseColor("#212121"));
-            window.getDecorView().setSystemUiVisibility(0);
-        }
+        Window window = getWindow();
+        window.setStatusBarColor(Color.parseColor("#212121"));
+        window.getDecorView().setSystemUiVisibility(0);
     }
     private void showFilterMenu(View anchor) {
         PopupMenu popup = new PopupMenu(this, anchor);
@@ -89,13 +87,13 @@ public class MainActivity extends AppCompatActivity {
         popup.setOnMenuItemClickListener(menuItem -> {
             int id = menuItem.getItemId();
             if (id == R.id.filter_name) {
-                Toast.makeText(this, "Filter by name", Toast.LENGTH_SHORT).show();
+                viewModel.getTasksByName().observe(this, adapter::setTasks);
                 return true;
             } else if (id == R.id.filter_priority) {
-                Toast.makeText(this, "Filter by priority", Toast.LENGTH_SHORT).show();
+                viewModel.getTasksByPriority().observe(this, adapter::setTasks);
                 return true;
             } else if (id == R.id.filter_recent) {
-                Toast.makeText(this, "Filter by last created", Toast.LENGTH_SHORT).show();
+                viewModel.getTasksByNewest().observe(this, adapter::setTasks);
                 return true;
             }
             return false;

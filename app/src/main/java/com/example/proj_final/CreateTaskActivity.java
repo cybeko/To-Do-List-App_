@@ -51,7 +51,7 @@ public class CreateTaskActivity extends AppCompatActivity {
 
         if (intent.hasExtra("taskId")) {
             taskId = intent.getLongExtra("taskId", -1);
-            btnSave.setText("Редактировать");
+            btnSave.setText("Update");
 
             etTitle.setText(intent.getStringExtra("taskTitle"));
             etDescription.setText(intent.getStringExtra("taskDescription"));
@@ -76,7 +76,7 @@ public class CreateTaskActivity extends AppCompatActivity {
                         String.format("%02d:%02d", hour, minute));
             }
         } else {
-            btnSave.setText("Создать");
+            btnSave.setText("Create");
         }
     }
     private void initViewModel() {
@@ -107,9 +107,10 @@ public class CreateTaskActivity extends AppCompatActivity {
         String prio = etPriority.getText().toString().trim();
         long deadline = cbDeadline.isChecked() ? deadlineCalendar.getTimeInMillis() : 0;
 
-        if (!title.isEmpty() && !desc.isEmpty() && !prio.isEmpty()) {
+        if (!title.isEmpty() && !prio.isEmpty()) {
             int priority = Integer.parseInt(prio);
-            Task task = new Task(title, desc, priority, deadline);
+            String description = desc.isEmpty() ? "" : desc;
+            Task task = new Task(title, description, priority, deadline, isCompleted);
 
             if (taskId != -1) {
                 task._id = taskId;
@@ -119,6 +120,8 @@ public class CreateTaskActivity extends AppCompatActivity {
                 viewModel.insert(task);
             }
             finish();
+        } else {
+            Toast.makeText(this, "Enter title and priority!", Toast.LENGTH_SHORT).show();
         }
     }
     private void pickDateTime() {

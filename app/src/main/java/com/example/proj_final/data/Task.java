@@ -13,7 +13,7 @@ public class Task {
     public int priority;
     public long deadline;
     public boolean isCompleted;
-
+    public long createdAt;
     public Task() {}
     public Task(String title, String description, int priority, long deadline) {
         this.title = title;
@@ -21,6 +21,7 @@ public class Task {
         this.priority = priority;
         this.deadline = deadline;
         this.isCompleted = false;
+        this.createdAt = System.currentTimeMillis();
     }
 
     public Task(String title, String description, int priority, long deadline, boolean isCompleted) {
