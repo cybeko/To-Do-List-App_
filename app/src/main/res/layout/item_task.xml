@@ -1,0 +1,99 @@
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="12dp"
+    android:layout_marginVertical="6dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/material_dynamic_neutral80">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <CheckBox
+                android:id="@+id/cbCompleted"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:focusableInTouchMode="false"/>
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/material_dynamic_neutral10"
+                android:paddingStart="8dp"
+                android:text="Название задачи"/>
+            <ImageView
+                android:id="@+id/ivExpand"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_arrow"
+                android:scaleType="centerInside"
+                android:elevation="4dp"
+                android:clipToOutline="false"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/expandableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:paddingTop="12dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/material_dynamic_neutral80"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Описание задачи"
+                android:textSize="14sp"
+                android:textColor="@color/material_dynamic_neutral30"
+                android:lineSpacingExtra="4dp"
+                android:paddingBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/tvDeadline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="📅 Дедлайн: 12/05/2025 14:00"
+                android:textSize="13sp"
+                android:textColor="@color/material_dynamic_neutral40"
+                android:paddingBottom="4dp"/>
+
+            <TextView
+                android:id="@+id/tvPriority"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🔥 Приоритет: 2"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="@color/material_dynamic_neutral30"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/filter_name"
+        android:title="By Name"/>
+    <item
+        android:id="@+id/filter_priority"
+        android:title="By Priority"/>
+    <item
+        android:id="@+id/filter_recent"
+        android:title="By Last Created"/>
+</menu>
