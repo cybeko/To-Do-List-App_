@@ -9,7 +9,7 @@
         android:id="@+id/tvDialogTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Выберите действие"
+        android:text="@string/select_action"
         android:textSize="20sp"
         android:textStyle="bold"
         android:paddingBottom="16dp"/>
@@ -19,7 +19,7 @@
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Изменить"
+        android:text="@string/edit"
         android:layout_marginBottom="8dp"/>
 
     <com.google.android.material.button.MaterialButton
@@ -27,5 +27,5 @@
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Удалить"/>
+        android:text="@string/delete"/>
 </LinearLayout>

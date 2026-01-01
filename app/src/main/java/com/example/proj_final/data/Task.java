@@ -1,9 +1,9 @@
 package com.example.proj_final.data;
+import android.annotation.SuppressLint;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
 @Entity(tableName = "tasks")
 public class Task {
     @PrimaryKey(autoGenerate = true)
@@ -55,7 +55,7 @@ public class Task {
     @Override
     public String toString() {
         String status = isCompleted ? "✓" : "✗";
-        String deadlineStr = (deadline > 0)
+        @SuppressLint("SimpleDateFormat") String deadlineStr = (deadline > 0)
                 ? " | " + new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm").format(deadline)
                 : "";
         return "[" + status + "] " + title +

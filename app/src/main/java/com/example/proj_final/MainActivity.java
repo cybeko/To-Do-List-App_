@@ -1,15 +1,15 @@
 package com.example.proj_final;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
-import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,12 +24,14 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import androidx.appcompat.app.AlertDialog;
 import com.example.proj_final.data.Task;
 
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
     private TaskViewModel viewModel;
     private final TaskAdapter adapter = new TaskAdapter();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        restoreLanguage();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -61,12 +63,44 @@ public class MainActivity extends AppCompatActivity {
         adapter.setOnTaskClickListener(this::showTaskOptionsDialog);
         adapter.setOnTaskStatusChangedListener(task -> viewModel.update(task));
     }
+    private void restoreLanguage() {
+        SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
+        boolean isUkr = prefs.getBoolean("isUkrainian", false);
+
+        Locale locale = isUkr ? new Locale("uk") : Locale.ENGLISH;
+        Locale.setDefault(locale);
+
+        Configuration config = getResources().getConfiguration();
+        config.setLocale(locale);
+        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+    }
+
+    private void toggleLanguage() {
+        SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
+        boolean isUkr = prefs.getBoolean("isUkrainian", false);
+        isUkr = !isUkr;
+
+        prefs.edit().putBoolean("isUkrainian", isUkr).apply();
+
+        Locale locale = isUkr ? new Locale("uk") : Locale.ENGLISH;
+        Locale.setDefault(locale);
+
+        Configuration config = getResources().getConfiguration();
+        config.setLocale(locale);
+        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+
+        String message = getString(R.string.language_switched);
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+
+        recreate();
+    }
+
     private void setupToolbar() {
         MaterialToolbar topAppBar = findViewById(R.id.topAppBar);
         topAppBar.setOnMenuItemClickListener(item -> {
             int id = item.getItemId();
             if (id == R.id.action_translate) {
-                Toast.makeText(this, "translate clicked", Toast.LENGTH_SHORT).show();
+                toggleLanguage();
                 return true;
             } else if (id == R.id.action_filter) {
                 View filterView = topAppBar.findViewById(R.id.action_filter);
@@ -78,9 +112,11 @@ public class MainActivity extends AppCompatActivity {
     }
     private void setupStatusBar() {
         Window window = getWindow();
-        window.setStatusBarColor(Color.parseColor("#212121"));
+        int color = ContextCompat.getColor(this, R.color.bgStatusBar);
+        window.setStatusBarColor(color);
         window.getDecorView().setSystemUiVisibility(0);
     }
+
     private void showFilterMenu(View anchor) {
         PopupMenu popup = new PopupMenu(this, anchor);
         popup.getMenuInflater().inflate(R.menu.filter_menu, popup.getMenu());
@@ -131,13 +167,12 @@ public class MainActivity extends AppCompatActivity {
     }
     private void showDeleteConfirmDialog(Task task) {
         new MaterialAlertDialogBuilder(this)
-                .setTitle("Видалити задачу")
-                .setMessage("Ви впевнені, що хочете видалити задачу:\n\n\""
-                        + task.title + "\"\n\nНазавжди?")
-                .setPositiveButton("Видалити", (dialog, which) -> {
+                .setTitle(getString(R.string.delete_task_title))
+                .setMessage(getString(R.string.delete_task_message, task.title))
+                .setPositiveButton(R.string.delete, (dialog, which) -> {
                     viewModel.delete(task);
                 })
-                .setNegativeButton("Скасувати", null)
+                .setNegativeButton(R.string.cancel, null)
                 .show();
     }
 }

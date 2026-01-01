@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">proj_final</string>
+
+    <string name="update">Оновити</string>
+    <string name="create">Створити</string>
+
+    <string name="delete_task_title">Видалити задачу</string>
+    <string name="delete_task_message">
+        Ви впевнені, що хочете видалити задачу:\n\n"%1$s"\n\nНазавжди?
+    </string>
+    <string name="language_switched">Language switched to English</string>
+
+    <string name="delete">Видалити</string>
+    <string name="edit">Змінити</string>
+    <string name="title">Назва</string>
+    <string name="none">немає</string>
+    <string name="deadline">Дедлайн</string>
+    <string name="description">Опис</string>
+    <string name="priority">Пріоритет</string>
+    <string name="choose_date_time">Оберіть дату та час</string>
+    <string name="action_translate">Перекласти</string>
+    <string name="action_filter">Фільтр</string>
+
+    <string name="select_action">Виберіть дію</string>
+    <string name="add_deadline">Додати дедлайн</string>
+    <string name="save">Зберегти</string>
+    <string name="cancel">Скасувати</string>
+
+    <string name="create_new_task">Створити нову задачу</string>
+    <string name="enter_title_priority">Введіть назву та пріоритет!</string>
+
+    <string name="filter_by_name">За назвою</string>
+    <string name="filter_by_priority">За пріоритетом</string>
+    <string name="filter_by_recent">За останнім створенням</string>
+
+
+</resources>

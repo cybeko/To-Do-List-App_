@@ -3,6 +3,7 @@ package com.example.proj_final.ui;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.example.proj_final.data.Task;
 import com.example.proj_final.R;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.VH> {
     private List<Task> data = new ArrayList<>();
     private OnTaskClickListener listener;
@@ -51,6 +53,8 @@ import java.util.List;public class TaskAdapter extends RecyclerView.Adapter<Task
     public void onBindViewHolder(@NonNull VH holder, int pos) {
         Task task = data.get(pos);
 
+        Context context = holder.itemView.getContext();
+
         // Title
         holder.tv.setText(task.getTitle());
 
@@ -58,29 +62,43 @@ import java.util.List;public class TaskAdapter extends RecyclerView.Adapter<Task
         holder.cb.setChecked(task.isCompleted);
 
         // Description
+        String descriptionText = task.getDescription().isEmpty()
+                ? context.getString(R.string.none)
+                : task.getDescription();
         holder.tvDescription.setText(
-                "Description: " + (task.getDescription().isEmpty()
-                        ? "—"
-                        : task.getDescription())
+                context.getString(R.string.description_format,
+                        context.getString(R.string.description),
+                        descriptionText)
         );
 
         // Priority
         holder.tvPriority.setText(
-                "Priority: " + task.getPriority()
+                context.getString(R.string.priority_format,
+                        context.getString(R.string.priority),
+                        String.valueOf(task.getPriority()))
         );
 
         // Deadline
+        String deadlineText;
         if (task.getDeadline() > 0) {
-            String formattedDate = new java.text.SimpleDateFormat(
-                    "dd/MM/yyyy HH:mm"
-            ).format(task.getDeadline());
+            Date deadlineDate = new Date(task.getDeadline());
+            java.text.DateFormat dateFormat = java.text.DateFormat.getDateTimeInstance(
+                    java.text.DateFormat.SHORT,
+                    java.text.DateFormat.SHORT,
+                    context.getResources().getConfiguration().locale
+            );
 
-            holder.tvDeadline.setText("Deadline: " + formattedDate);
-            holder.tvDeadline.setVisibility(View.VISIBLE);
+            deadlineText = dateFormat.format(deadlineDate);
         } else {
-            holder.tvDeadline.setText("Deadline: none");
-            holder.tvDeadline.setVisibility(View.VISIBLE);
+            deadlineText = context.getString(R.string.none);
         }
+
+        holder.tvDeadline.setText(
+                context.getString(R.string.deadline_format,
+                        context.getString(R.string.deadline),
+                        deadlineText)
+        );
+        holder.tvDeadline.setVisibility(View.VISIBLE);
 
         // checkbox
         holder.cb.setOnClickListener(v -> {
@@ -110,7 +128,6 @@ import java.util.List;public class TaskAdapter extends RecyclerView.Adapter<Task
             }
         });
     }
-
     private void expand(View v) {
         v.setVisibility(View.VISIBLE);
         v.measure(

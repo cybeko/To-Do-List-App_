@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/filter_name"
-        android:title="By Name"/>
+        android:title="@string/filter_by_name"/>
     <item
         android:id="@+id/filter_priority"
-        android:title="By Priority"/>
+        android:title="@string/filter_by_priority"/>
     <item
         android:id="@+id/filter_recent"
-        android:title="By Last Created"/>
+        android:title="@string/filter_by_recent"/>
 </menu>

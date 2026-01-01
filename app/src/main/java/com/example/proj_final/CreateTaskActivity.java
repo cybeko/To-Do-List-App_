@@ -2,7 +2,9 @@ package com.example.proj_final;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +13,7 @@ import com.example.proj_final.data.Task;
 import com.example.proj_final.ui.TaskViewModel;
 
 import java.util.Calendar;
+import java.util.Locale;
 
 public class CreateTaskActivity extends AppCompatActivity {
     private TaskViewModel viewModel;
@@ -18,7 +21,6 @@ public class CreateTaskActivity extends AppCompatActivity {
     private CheckBox cbDeadline;
     private Button btnSave;
     private boolean isCompleted = false;
-
     private Calendar deadlineCalendar = Calendar.getInstance();
     private long taskId = -1;
 
@@ -48,10 +50,9 @@ public class CreateTaskActivity extends AppCompatActivity {
     }
     private void handleIntent() {
         Intent intent = getIntent();
-
         if (intent.hasExtra("taskId")) {
             taskId = intent.getLongExtra("taskId", -1);
-            btnSave.setText("Update");
+            btnSave.setText(R.string.update);
 
             etTitle.setText(intent.getStringExtra("taskTitle"));
             etDescription.setText(intent.getStringExtra("taskDescription"));
@@ -72,13 +73,21 @@ public class CreateTaskActivity extends AppCompatActivity {
                 int hour = c.get(Calendar.HOUR_OF_DAY);
                 int minute = c.get(Calendar.MINUTE);
 
-                etDeadline.setText(day + "/" + month + "/" + year + " " +
-                        String.format("%02d:%02d", hour, minute));
+                String formattedDateTime = this.getString(
+                        R.string.date_time_format,
+                        day,
+                        month,
+                        year,
+                        hour,
+                        minute
+                );
+                etDeadline.setText(formattedDateTime);
             }
         } else {
-            btnSave.setText("Create");
+            btnSave.setText(R.string.create);
         }
     }
+
     private void initViewModel() {
         viewModel = new ViewModelProvider(
                 this,
@@ -121,7 +130,10 @@ public class CreateTaskActivity extends AppCompatActivity {
             }
             finish();
         } else {
-            Toast.makeText(this, "Enter title and priority!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,
+                    getString(R.string.enter_title_priority),
+                    Toast.LENGTH_SHORT
+            ).show();
         }
     }
     private void pickDateTime() {
@@ -133,10 +145,15 @@ public class CreateTaskActivity extends AppCompatActivity {
                             (timeView, hourOfDay, minute) -> {
                                 deadlineCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                                 deadlineCalendar.set(Calendar.MINUTE, minute);
-                                etDeadline.setText(
-                                        dayOfMonth + "/" + (month + 1) + "/" + year + " " +
-                                                String.format("%02d:%02d", hourOfDay, minute)
+                                String formattedDateTime = getString(
+                                        R.string.date_time_format,
+                                        dayOfMonth,
+                                        month + 1,
+                                        year,
+                                        hourOfDay,
+                                        minute
                                 );
+                                etDeadline.setText(formattedDateTime);
                             },
                             now.get(Calendar.HOUR_OF_DAY),
                             now.get(Calendar.MINUTE),

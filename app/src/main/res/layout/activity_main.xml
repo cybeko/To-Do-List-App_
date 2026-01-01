@@ -17,7 +17,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="To Do App"
+            android:text="@string/app_title"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             android:layout_gravity="start|center_vertical"
@@ -29,9 +29,20 @@
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnCreateTask"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Создать новую задачу"/>
+        android:text="@string/create_new_task"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:backgroundTint="?attr/colorPrimary"
+        android:layout_margin="16dp"
+        android:paddingVertical="12dp"
+        app:cornerRadius="16dp"
+        app:icon="@drawable/ic_add"
+        app:iconGravity="textStart"
+        app:iconPadding="8dp"
+        app:iconTint="@android:color/white"/>
+
 </LinearLayout>

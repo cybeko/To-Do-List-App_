@@ -1,3 +1,44 @@
 <resources>
-    <string name="app_name">proj_final</string>
+    <string name="app_name">To Do App</string>
+    <string name="app_title" translatable="false">To Do App</string>
+
+    <string name="update">Update</string>
+    <string name="create">Create</string>
+
+    <string name="delete_task_title">Delete task</string>
+    <string name="delete_task_message">
+        Are you sure you want to delete the task:\n\n"%1$s"\n\nForever?
+    </string>
+    <string name="language_switched">Language switched to English</string>
+
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="title">Title</string>
+    <string name="none">none</string>
+    <string name="description">Description</string>
+    <string name="deadline">Deadline</string>
+    <string name="priority">Priority</string>
+    <string name="choose_date_time">Choose date and time</string>
+    <string name="action_translate">Translate</string>
+    <string name="action_filter">Filter</string>
+
+    <string name="select_action">Select action</string>
+    <string name="add_deadline">Add deadline</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="create_new_task">Create new task</string>
+
+    <string name="description_format" translatable="false">%1$s: %2$s</string>
+    <string name="priority_format" translatable="false">%1$s: %2$s</string>
+    <string name="deadline_format" translatable="false">%1$s: %2$s</string>
+    <string name="date_time_format" translatable="false">%1$02d/%2$02d/%3$d %4$02d:%5$02d</string>
+    <string name="enter_title_priority">Enter title and priority!</string>
+
+    <string name="filter_by_name">By name</string>
+    <string name="filter_by_priority">By priority</string>
+    <string name="filter_by_recent">By Last created</string>
+
+
+
 </resources>

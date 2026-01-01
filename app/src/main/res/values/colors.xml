@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="bgStatusBar">#201C28</color>
+
+    <color name="bgPrimary">#008080</color>
+    <color name="bgNeutral">#C6E9E9</color>
 </resources>
