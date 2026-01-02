@@ -39,6 +39,13 @@
     <string name="filter_by_priority">By priority</string>
     <string name="filter_by_recent">By Last created</string>
 
+    <string name="failed_load_quote">Failed to load quote</string>
+    <string name="notification_title">Time to do your tasks!</string>
+    <string name="notification_quote">%1$s — %2$s</string>
+    <string name="notification_channel_name">Task reminders</string>
+    <string name="notification_channel_description">Reminds you to do your tasks</string>
+    <string name="notifications_enabled">Notifications enabled</string>
+    <string name="notifications_disabled">Notifications disabled</string>
 
 
 </resources>

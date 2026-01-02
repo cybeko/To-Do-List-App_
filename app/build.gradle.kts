@@ -45,7 +45,7 @@ dependencies {
     implementation("androidx.core:core-ktx:1.17.0")
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.recyclerview:recyclerview:1.4.0")
-
+    implementation("com.karumi:dexter:6.2.3")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity.v172)

@@ -33,5 +33,12 @@
     <string name="filter_by_priority">За пріоритетом</string>
     <string name="filter_by_recent">За останнім створенням</string>
 
+    <string name="failed_load_quote">Не вдалося завантажити цитату</string>
+    <string name="notification_title">Час виконати ваші завдання!</string>
+    <string name="notification_quote">%1$s — %2$s</string>
+    <string name="notification_channel_name">Нагадування про завдання</string>
+    <string name="notification_channel_description">Нагадує виконати ваші завдання</string>
+    <string name="notifications_enabled">Сповіщення увімкнено</string>
+    <string name="notifications_disabled">Сповіщення вимкнено</string>
 
 </resources>

@@ -1,14 +1,24 @@
 package com.example.proj_final;
 
+import android.Manifest;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,17 +33,32 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import androidx.appcompat.app.AlertDialog;
 import com.example.proj_final.data.Task;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     private TaskViewModel viewModel;
+    private static final String CHANNEL_ID = "todo_reminder_channel";
     private final TaskAdapter adapter = new TaskAdapter();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         restoreLanguage();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        askNotificationPermission();
 
         setupStatusBar();
         setupToolbar();
@@ -94,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
 
         recreate();
     }
-
     private void setupToolbar() {
         MaterialToolbar topAppBar = findViewById(R.id.topAppBar);
         topAppBar.setOnMenuItemClickListener(item -> {
@@ -106,17 +130,102 @@ public class MainActivity extends AppCompatActivity {
                 View filterView = topAppBar.findViewById(R.id.action_filter);
                 showFilterMenu(filterView);
                 return true;
+            }else if (id == R.id.action_quote) {
+                fetchRandomQuote();
+                return true;
             }
             return false;
         });
     }
+    private void fetchRandomQuote() {
+        new Thread(() -> {
+            try {
+                URL url = new URL("https://zenquotes.io/api/random");
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("GET");
+                conn.connect();
+
+                BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(conn.getInputStream())
+                );
+
+                StringBuilder json = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    json.append(line);
+                }
+                reader.close();
+
+                JSONArray arr = new JSONArray(json.toString());
+                JSONObject obj = arr.getJSONObject(0);
+
+                String quote = obj.getString("q");
+                String author = obj.getString("a");
+
+                runOnUiThread(() ->
+                        showReminderNotification(quote, author)
+                );
+
+            } catch (Exception e) {
+                runOnUiThread(() ->
+                        Toast.makeText(this, getString(R.string.failed_load_quote), Toast.LENGTH_SHORT).show()
+                );
+            }
+        }).start();
+    }
+    private void showReminderNotification(String quote, String author) {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(
+                this,
+                0,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+        );
+
+        Notification notification =
+                new NotificationCompat.Builder(this, CHANNEL_ID)
+                        .setSmallIcon(R.drawable.ic_quote)
+                        .setContentTitle(getString(R.string.notification_title))
+                        .setContentText("“" + quote + "” — " + author)
+                        .setStyle(new NotificationCompat.BigTextStyle()
+                                .bigText("“" + quote + "”\n— " + author))
+                        .setContentIntent(pendingIntent)
+                        .setAutoCancel(true)
+                        .build();
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        NotificationManagerCompat.from(this).notify(1, notification);
+    }
+    private void askNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            Dexter.withContext(this)
+                    .withPermission(Manifest.permission.POST_NOTIFICATIONS)
+                    .withListener(new PermissionListener() {
+                        @Override
+                        public void onPermissionGranted(PermissionGrantedResponse response) {
+                        }
+                        @Override
+                        public void onPermissionDenied(PermissionDeniedResponse response) {
+                        }
+                        @Override
+                        public void onPermissionRationaleShouldBeShown(PermissionRequest permission,
+                                                                       PermissionToken token) {
+                            token.continuePermissionRequest();
+                        }
+                    }).check();
+        }
+    }
+
     private void setupStatusBar() {
         Window window = getWindow();
         int color = ContextCompat.getColor(this, R.color.bgStatusBar);
         window.setStatusBarColor(color);
         window.getDecorView().setSystemUiVisibility(0);
     }
-
     private void showFilterMenu(View anchor) {
         PopupMenu popup = new PopupMenu(this, anchor);
         popup.getMenuInflater().inflate(R.menu.filter_menu, popup.getMenu());
