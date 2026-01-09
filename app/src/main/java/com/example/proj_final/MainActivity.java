@@ -1,11 +1,9 @@
 package com.example.proj_final;
 
 import android.Manifest;
-import android.app.Notification;
-import android.app.PendingIntent;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,9 +11,7 @@ import android.view.Window;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
+
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,9 +26,11 @@ import com.example.proj_final.ui.TaskViewModel;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.proj_final.worker.DailyQuoteScheduler;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import androidx.appcompat.app.AlertDialog;
+
 import com.example.proj_final.data.Task;
 
 import com.karumi.dexter.Dexter;
@@ -46,7 +44,6 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     private TaskViewModel viewModel;
-    private static final String CHANNEL_ID = "todo_reminder_channel";
     private final TaskAdapter adapter = new TaskAdapter();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
         setupRecyclerView();
         setupViewModel();
         setupCreateButton();
+
+        DailyQuoteScheduler.scheduleQuotes(this, 9, 0, "morning_quote");
+        DailyQuoteScheduler.scheduleQuotes(this, 18, 0, "evening_quote");
     }
     private void setupViewModel() {
         viewModel = new ViewModelProvider(
@@ -151,33 +151,6 @@ public class MainActivity extends AppCompatActivity {
                 );
             }
         });
-    }
-    private void showReminderNotification(String quote, String author) {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
-        PendingIntent pendingIntent = PendingIntent.getActivity(
-                this,
-                0,
-                intent,
-                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
-        );
-
-        Notification notification =
-                new NotificationCompat.Builder(this, CHANNEL_ID)
-                        .setSmallIcon(R.drawable.ic_quote)
-                        .setContentTitle(getString(R.string.notification_title))
-                        .setContentText("“" + quote + "” — " + author)
-                        .setStyle(new NotificationCompat.BigTextStyle()
-                                .bigText("“" + quote + "”\n— " + author))
-                        .setContentIntent(pendingIntent)
-                        .setAutoCancel(true)
-                        .build();
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        NotificationManagerCompat.from(this).notify(1, notification);
     }
     private void askNotificationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
