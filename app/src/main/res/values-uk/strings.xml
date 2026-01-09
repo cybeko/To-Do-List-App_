@@ -8,7 +8,7 @@
     <string name="delete_task_message">
         Ви впевнені, що хочете видалити задачу:\n\n"%1$s"\n\nНазавжди?
     </string>
-    <string name="language_switched">Language switched to English</string>
+    <string name="language_switched">Мову переключено на українську</string>
 
     <string name="delete">Видалити</string>
     <string name="edit">Змінити</string>
