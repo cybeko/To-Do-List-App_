@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Proj_final">
         <activity android:name=".CreateTaskActivity"/>
-
+        <activity android:name=".NotificationTimesActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

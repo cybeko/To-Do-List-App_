@@ -7,9 +7,7 @@ import androidx.work.WorkManager;
 import androidx.work.ExistingWorkPolicy;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
-
 public class DailyQuoteScheduler {
-
     public static void scheduleQuotes(Context context, int hour, int minute, String workName) {
         Calendar now = Calendar.getInstance();
         Calendar due = Calendar.getInstance();
@@ -19,7 +17,7 @@ public class DailyQuoteScheduler {
 
         long initialDelay = due.getTimeInMillis() - now.getTimeInMillis();
         if (initialDelay < 0) {
-            initialDelay += TimeUnit.DAYS.toMillis(1); // schedule for tomorrow
+            initialDelay += TimeUnit.DAYS.toMillis(1);
         }
 
         OneTimeWorkRequest quoteWork = new OneTimeWorkRequest.Builder(DailyQuoteWorker.class)

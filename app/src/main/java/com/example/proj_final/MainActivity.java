@@ -17,8 +17,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.proj_final.data.NotificationTime;
 import com.example.proj_final.data.Quote;
 import com.example.proj_final.network.QuoteApi;
+import com.example.proj_final.ui.NotificationTimeViewModel;
 import com.example.proj_final.ui.QuoteNotifier;
 import com.example.proj_final.ui.TaskAdapter;
 import com.example.proj_final.ui.TaskViewModel;
@@ -58,8 +60,23 @@ public class MainActivity extends AppCompatActivity {
         setupViewModel();
         setupCreateButton();
 
-        DailyQuoteScheduler.scheduleQuotes(this, 9, 0, "morning_quote");
-        DailyQuoteScheduler.scheduleQuotes(this, 18, 0, "evening_quote");
+        scheduleAllNotificationTimes();
+    }
+    private void scheduleAllNotificationTimes() {
+        NotificationTimeViewModel vm = new ViewModelProvider(this).get(NotificationTimeViewModel.class);
+
+        vm.getAllTimes().observe(this, times -> {
+            if (times == null || times.isEmpty()) return;
+
+            for (NotificationTime t : times) {
+                DailyQuoteScheduler.scheduleQuotes(
+                        MainActivity.this,
+                        t.hour,
+                        t.minute,
+                        "quote_" + t.hour + "_" + t.minute
+                );
+            }
+        });
     }
     private void setupViewModel() {
         viewModel = new ViewModelProvider(
@@ -94,7 +111,6 @@ public class MainActivity extends AppCompatActivity {
         config.setLocale(locale);
         getResources().updateConfiguration(config, getResources().getDisplayMetrics());
     }
-
     private void toggleLanguage() {
         SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
         boolean isUkr = prefs.getBoolean("isUkrainian", false);
@@ -127,6 +143,10 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }else if (id == R.id.action_quote) {
                 fetchRandomQuote();
+                return true;
+            }
+            else if (id == R.id.action_notifications) {
+                startActivity(new Intent(this, NotificationTimesActivity.class));
                 return true;
             }
             return false;

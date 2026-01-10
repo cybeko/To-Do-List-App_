@@ -21,7 +21,6 @@ public class DailyQuoteWorker extends Worker {
             public void onSuccess(Quote quote) {
                 QuoteNotifier.showQuoteNotification(getApplicationContext(), quote.text, quote.author);
             }
-
             @Override
             public void onError(Exception e) {
                 e.printStackTrace();

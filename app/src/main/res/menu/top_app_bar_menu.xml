@@ -20,4 +20,10 @@
         android:title="Quote"
         app:showAsAction="always" />
 
+    <item
+        android:id="@+id/action_notifications"
+        android:icon="@drawable/ic_notifications"
+        android:title="Notifications"
+        app:showAsAction="always"/>
+
 </menu>
