@@ -1,4 +1,4 @@
-package com.example.proj_final.data;
+package com.example.proj_final.data.task;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

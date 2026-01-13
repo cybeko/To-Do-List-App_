@@ -1,4 +1,4 @@
-package com.example.proj_final;
+package com.example.proj_final.ui.notification;
 
 import android.app.TimePickerDialog;
 import android.os.Bundle;
@@ -12,10 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.work.WorkManager;
 
-import com.example.proj_final.data.NotificationTime;
-import com.example.proj_final.ui.NotificationTimeAdapter;
-import com.example.proj_final.ui.NotificationTimeViewModel;
-import com.example.proj_final.worker.DailyQuoteScheduler;
+import com.example.proj_final.R;
+import com.example.proj_final.data.notification.NotificationTime;
+import com.example.proj_final.notifications.DailyQuoteScheduler;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.Calendar;

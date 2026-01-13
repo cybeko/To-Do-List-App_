@@ -1,4 +1,4 @@
-package com.example.proj_final.ui;
+package com.example.proj_final.notifications;
 
 import android.Manifest;
 import android.app.NotificationChannel;
@@ -53,7 +53,6 @@ public class QuoteNotifier {
                 .from(context)
                 .notify(NOTIFICATION_ID, builder.build());
     }
-
     private static void createNotificationChannel(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 

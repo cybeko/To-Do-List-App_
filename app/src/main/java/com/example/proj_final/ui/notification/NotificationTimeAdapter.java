@@ -1,4 +1,4 @@
-package com.example.proj_final.ui;
+package com.example.proj_final.ui.notification;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.proj_final.R;
-import com.example.proj_final.data.NotificationTime;
+import com.example.proj_final.data.notification.NotificationTime;
 
 import java.util.ArrayList;
 import java.util.List;

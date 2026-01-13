@@ -1,4 +1,4 @@
-package com.example.proj_final.ui;
+package com.example.proj_final.ui.task;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -15,7 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.proj_final.data.Task;
+import com.example.proj_final.data.task.Task;
 import com.example.proj_final.R;
 
 import java.util.ArrayList;

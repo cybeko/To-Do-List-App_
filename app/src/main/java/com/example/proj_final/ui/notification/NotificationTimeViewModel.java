@@ -1,4 +1,4 @@
-package com.example.proj_final.ui;
+package com.example.proj_final.ui.notification;
 
 import android.app.Application;
 
@@ -6,8 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.proj_final.data.NotificationTime;
-import com.example.proj_final.data.NotificationTimeRepository;
+import com.example.proj_final.data.notification.NotificationTime;
+import com.example.proj_final.data.notification.NotificationTimeRepository;
 
 import java.util.List;
 

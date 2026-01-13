@@ -1,7 +1,9 @@
-package com.example.proj_final.data;
+package com.example.proj_final.data.task;
 
 import android.app.Application;
 import androidx.lifecycle.LiveData;
+
+import com.example.proj_final.data.database.TaskDatabase;
 
 import java.util.List;
 

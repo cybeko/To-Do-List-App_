@@ -1,4 +1,4 @@
-package com.example.proj_final.data;
+package com.example.proj_final.data.quote;
 
 public class Quote {
     public final String text;

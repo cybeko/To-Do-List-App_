@@ -1,10 +1,10 @@
-package com.example.proj_final.ui;
+package com.example.proj_final.ui.task;
 
 import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import com.example.proj_final.data.Task;
-import com.example.proj_final.data.TaskRepository;
+import com.example.proj_final.data.task.Task;
+import com.example.proj_final.data.task.TaskRepository;
 
 import java.util.List;
 

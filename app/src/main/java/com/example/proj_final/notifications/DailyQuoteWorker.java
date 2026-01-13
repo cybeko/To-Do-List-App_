@@ -1,13 +1,12 @@
-package com.example.proj_final.worker;
+package com.example.proj_final.notifications;
 
 import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
-import com.example.proj_final.data.Quote;
+import com.example.proj_final.data.quote.Quote;
 import com.example.proj_final.network.QuoteApi;
-import com.example.proj_final.ui.QuoteNotifier;
 
 public class DailyQuoteWorker extends Worker {
     public DailyQuoteWorker(@NonNull Context context, @NonNull WorkerParameters params) {

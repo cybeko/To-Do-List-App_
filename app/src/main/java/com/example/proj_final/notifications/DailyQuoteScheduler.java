@@ -1,4 +1,4 @@
-package com.example.proj_final.worker;
+package com.example.proj_final.notifications;
 
 import android.content.Context;
 

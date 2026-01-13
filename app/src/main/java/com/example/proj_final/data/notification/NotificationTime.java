@@ -1,4 +1,4 @@
-package com.example.proj_final.data;
+package com.example.proj_final.data.notification;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

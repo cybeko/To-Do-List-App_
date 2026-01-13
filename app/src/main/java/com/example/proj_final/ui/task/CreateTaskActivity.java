@@ -1,19 +1,17 @@
-package com.example.proj_final;
+package com.example.proj_final.ui.task;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import com.example.proj_final.data.Task;
-import com.example.proj_final.ui.TaskViewModel;
+
+import com.example.proj_final.R;
+import com.example.proj_final.data.task.Task;
 
 import java.util.Calendar;
-import java.util.Locale;
 
 public class CreateTaskActivity extends AppCompatActivity {
     private TaskViewModel viewModel;

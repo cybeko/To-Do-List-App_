@@ -17,23 +17,25 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.proj_final.data.NotificationTime;
-import com.example.proj_final.data.Quote;
+import com.example.proj_final.data.notification.NotificationTime;
+import com.example.proj_final.data.quote.Quote;
 import com.example.proj_final.network.QuoteApi;
-import com.example.proj_final.ui.NotificationTimeViewModel;
-import com.example.proj_final.ui.QuoteNotifier;
-import com.example.proj_final.ui.TaskAdapter;
-import com.example.proj_final.ui.TaskViewModel;
+import com.example.proj_final.ui.notification.NotificationTimeViewModel;
+import com.example.proj_final.notifications.QuoteNotifier;
+import com.example.proj_final.ui.notification.NotificationTimesActivity;
+import com.example.proj_final.ui.task.CreateTaskActivity;
+import com.example.proj_final.ui.task.TaskAdapter;
+import com.example.proj_final.ui.task.TaskViewModel;
 
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.proj_final.worker.DailyQuoteScheduler;
+import com.example.proj_final.notifications.DailyQuoteScheduler;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import androidx.appcompat.app.AlertDialog;
 
-import com.example.proj_final.data.Task;
+import com.example.proj_final.data.task.Task;
 
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;

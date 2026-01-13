@@ -2,7 +2,7 @@ package com.example.proj_final.network;
 
 import androidx.annotation.NonNull;
 
-import com.example.proj_final.data.Quote;
+import com.example.proj_final.data.quote.Quote;
 
 import org.json.JSONArray;
 import org.json.JSONException;
