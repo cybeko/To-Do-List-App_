@@ -30,6 +30,7 @@ public class Task {
         this.priority = priority;
         this.deadline = deadline;
         this.isCompleted = isCompleted;
+        this.createdAt = System.currentTimeMillis();
     }
     public String getTitle() {
         return title;

@@ -18,11 +18,10 @@ public interface TaskDao {
     LiveData<List<Task>> getAllTasks();
     @Query("SELECT * FROM tasks ORDER BY title ASC")
     LiveData<List<Task>> getTasksByName();
-    @Query("SELECT * FROM tasks ORDER BY priority DESC")
+    @Query("SELECT * FROM tasks ORDER BY priority ASC")
     LiveData<List<Task>> getTasksByPriority();
     @Query("SELECT * FROM tasks ORDER BY createdAt DESC")
     LiveData<List<Task>> getTasksByNewest();
-
     @Query("DELETE FROM tasks")
     void deleteAll();
     @Update
