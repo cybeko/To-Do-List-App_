@@ -47,5 +47,8 @@
     <string name="notifications_enabled">Notifications enabled</string>
     <string name="notifications_disabled">Notifications disabled</string>
 
-
+    <string name="notification_times">Notification Times</string>
+    <string name="add_time">Add Time</string>
+    <string name="empty_notification_message">No notification times yet. Tap + to add one.</string>
+    <string name="back">Back</string>
 </resources>

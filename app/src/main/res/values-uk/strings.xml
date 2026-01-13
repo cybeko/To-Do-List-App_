@@ -40,5 +40,8 @@
     <string name="notification_channel_description">Нагадує виконати ваші завдання</string>
     <string name="notifications_enabled">Сповіщення увімкнено</string>
     <string name="notifications_disabled">Сповіщення вимкнено</string>
-
+    <string name="notification_times">Часи сповіщень</string>
+    <string name="add_time">Додати час</string>
+    <string name="empty_notification_message">Ще немає часів сповіщень. Натисніть +, щоб додати.</string>
+    <string name="back">Назад</string>
 </resources>

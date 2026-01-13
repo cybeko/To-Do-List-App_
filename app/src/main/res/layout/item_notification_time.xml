@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:gravity="center_vertical"
     android:layout_width="match_parent"
@@ -12,15 +13,19 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:text="09:00"/>
+        android:text="09:00"
+        android:textColor="@color/colorAccent"
+        app:rippleColor="@color/colorSurfaceRipple"
+        />
 
     <ImageButton
         android:id="@+id/btnDeleteTime"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
+        android:background="@android:color/transparent"
         android:src="@drawable/ic_close"
         android:rotation="45"
-        android:contentDescription="Delete time"/>
+        android:contentDescription="Delete time"
+        app:tint="@color/colorAccent"/>
 
 </LinearLayout>

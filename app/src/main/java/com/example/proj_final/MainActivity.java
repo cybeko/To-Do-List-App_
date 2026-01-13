@@ -222,10 +222,12 @@ public class MainActivity extends AppCompatActivity {
         View dialogView = getLayoutInflater()
                 .inflate(R.layout.dialog_task_options, null);
 
-        AlertDialog dialog = new MaterialAlertDialogBuilder(this)
+        AlertDialog dialog = new MaterialAlertDialogBuilder(this, R.style.MyDialogTheme)
                 .setTitle(task.title)
                 .setView(dialogView)
                 .create();
+        dialog.show();
+
 
         dialogView.findViewById(R.id.btnEditTask).setOnClickListener(v -> {
             dialog.dismiss();
@@ -248,7 +250,7 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
     private void showDeleteConfirmDialog(Task task) {
-        new MaterialAlertDialogBuilder(this)
+        new MaterialAlertDialogBuilder(this, R.style.MyDialogTheme)
                 .setTitle(getString(R.string.delete_task_title))
                 .setMessage(getString(R.string.delete_task_message, task.title))
                 .setPositiveButton(R.string.delete, (dialog, which) -> {

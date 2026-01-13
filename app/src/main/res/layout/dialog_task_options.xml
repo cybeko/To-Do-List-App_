@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="24dp"
     android:layout_width="match_parent"
@@ -12,7 +13,8 @@
         android:text="@string/select_action"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:paddingBottom="16dp"/>
+        android:paddingBottom="16dp"
+     />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnEditTask"
@@ -20,12 +22,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/edit"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/colorAccent"
+        app:rippleColor="@color/colorSurfaceRipple"
+        />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnDeleteTask"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorAccent"
+        app:rippleColor="@color/colorSurfaceRipple"
         android:text="@string/delete"/>
 </LinearLayout>
